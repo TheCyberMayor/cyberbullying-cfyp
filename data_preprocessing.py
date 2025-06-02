@@ -4,7 +4,7 @@ import re
 import string
 
 # Load the dataset
-df = pd.read_csv("4258172b-f37c-4edc-b97b-bea85b0aa7e5.csv")
+df = pd.read_csv("data.csv")
 
 # Define a built-in list of common English stopwords
 stopwords = {
@@ -17,8 +17,8 @@ stopwords = {
 
 # Define the text cleaning function
 def clean_text(text):
-    text = re.sub(r'\x[0-9A-Fa-f]+', ' ', text)
-    text = re.sub(r'\u[0-9A-Fa-f]+', ' ', text)
+    text = re.sub(r'\\x[0-9A-Fa-f]+', ' ', text)  # fix: double backslash
+    text = re.sub(r'\\u[0-9A-Fa-f]+', ' ', text)  # fix: double backslash
     text = text.encode('ascii', 'ignore').decode('utf-8')
     text = re.sub(r'\s+', ' ', text)
     text = text.lower()
